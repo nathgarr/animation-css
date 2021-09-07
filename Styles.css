@@ -1,0 +1,133 @@
+/* structure de base pour personaliser des lien */
+body{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    height: 60vh;
+}
+.slide-line{
+    font-family: sans-serif;
+    font-size: 50px;
+    text-decoration: none;
+    color:#222;
+    position: relative;
+}
+/* struture du soulignage decalage de lorigine a la fin du mot 100% de x et equivalent a toute la largeur donc l'animation fini sur x*/
+.slide-line::before{
+    content: "";
+    position: absolute;
+    background: #222;
+    width: 100%;
+    height: 3px;
+    bottom: 0;
+    transform-origin: 100% 0;
+    transform: scaleX(0);
+    transition: transform 0.4s;
+}
+/* grace a l'origine 0 0 et scale X 1 la ligna va rush le 100% x et s'arrete */
+.slide-line:hover::before{
+    transform-origin: 0 0;
+    transform: scaleX(1);
+}
+.slide-link{
+    font-family: serif;
+    overflow: hidden;
+    position: relative;
+    font-size: 50px;
+    color: #222;
+}
+/* inline block car les span ne peuvent pas etre transform en inline. transition 0.3sec signifi que lanimation demare en 0.3sec */
+.slide-link span{
+    padding: 10px;
+    display: inline-block;
+    transition: transform 0.3s ease-out;
+}
+/* left pour decaler le download2 sur la droite car il sort du block */
+.slide-link span:nth-child(2){
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    left: 100%;
+}
+.slide-link:hover span{
+    transform:translateX(-100%);
+}
+.two-line{
+    font-size: 50px;
+    text-decoration: none;
+    position: relative;
+    color: #222;
+}
+/* opacity pour camoufler. on peux regrouper des élement bénéficient des même ordre translate pour decaler -50% de largeur sur 10px */
+.two-line::before,
+.two-line::after{
+    content: "";
+    position: absolute;
+    height: 2px;
+    background: #222;
+    opacity: 0;
+    left: 50%;
+    transform: translate(-50%, 10px);
+    transition: all 0.2s ease-in-out;
+}
+/* taille des trait */
+.two-line::before{
+    width: 90%;
+    bottom: 0;
+}
+.two-line::after{
+    width: 60%;
+    bottom: -7px;
+}
+/* réaparition du trait seulement en passage de sourit. -50% de largeur sur 0px */
+.two-line:hover::before,
+.two-line:hover::after{
+    opacity: 1;
+    transform: translate(-50%, 0px);
+}
+/* pour différer l'arriver des élément comme la les 2 barre apparaissent en décaler et disparaisse en décaler pour arriver a ce resulta i ne faut pas metre de class hover dans le premier set-up sur le before et ne pas oublier de mettre un delay plus bas*/
+.two-line::before,
+.two-line:hover::after{
+    transition-delay: 0.1s;
+}
+.two-line:hover::before{
+    transition-delay: 0s;
+}
+.shamalow{
+    font-size: 100px;
+    text-decoration: none;
+    position: relative;
+    color: purple;
+}
+.shamalow::before,
+.shamalow::after{
+    content: "";
+    position: absolute;
+    height: 2px;
+    background-color: purple;
+    opacity: 0;
+    left: 50%;
+    transform: translate(-50%, 10px);
+    transition: all 0.2sec ease-in-out;
+}
+.shamalow::before{
+    width: 90%;
+    bottom: 0;
+}
+.shamalow::after{
+    width: 60%;
+    bottom: -7px;
+}
+.shamalow:hover::before,
+.shamalow:hover::after{
+    opacity: 1;
+    transform: translate(-50%, 0px);
+}
+.shamalow::before,
+.shamalow:hover::after{
+    transition-delay: 0.4s;
+}
+.shamalow:hover:before{
+    transition-delay: 0s;
+}
